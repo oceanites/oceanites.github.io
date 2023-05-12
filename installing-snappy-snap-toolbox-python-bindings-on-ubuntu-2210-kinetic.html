@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="/theme/pygments/github.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+
+
+  <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#333">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#333">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Microsoft EDGE -->
+  <meta name="msapplication-TileColor" content="#333">
+
+
+
+
+
+
+
+
+
+ 
+
+<meta name="author" content="oceanites" />
+<meta name="description" content="Download SNAP package and install it: chmod +x esa-snap_sentinel_unix_9_0_0.sh ./esa-snap_sentinel_unix_9_0_0.sh Installation directory: ~/.snap Symlink folder: ~/.local/bin (&#34;Select the folder where you would like ESA SNAP to create symlinks, then click Next.&#34;) Python path: /usr/bin/python3 (&#34;Python executable&#34;) Install OpenJDK 8: as documented on the ubuntuusers.de …" />
+<meta name="keywords" content="">
+
+
+  <meta property="og:site_name" content="oceanites' blog"/>
+  <meta property="og:title" content="Installing Snappy (SNAP toolbox python bindings) on Ubuntu 22.10 (kinetic)"/>
+  <meta property="og:description" content="Download SNAP package and install it: chmod +x esa-snap_sentinel_unix_9_0_0.sh ./esa-snap_sentinel_unix_9_0_0.sh Installation directory: ~/.snap Symlink folder: ~/.local/bin (&#34;Select the folder where you would like ESA SNAP to create symlinks, then click Next.&#34;) Python path: /usr/bin/python3 (&#34;Python executable&#34;) Install OpenJDK 8: as documented on the ubuntuusers.de …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="/installing-snappy-snap-toolbox-python-bindings-on-ubuntu-2210-kinetic.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2023-05-12 00:00:00+02:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="/author/oceanites.html">
+  <meta property="article:section" content="misc"/>
+  <meta property="og:image" content="/images/profile.png">
+
+  <title>oceanites' blog &ndash; Installing Snappy (SNAP toolbox python bindings) on Ubuntu 22.10 (kinetic)</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="/">
+      <img src="/images/profile.png" alt="oceanites' blog" title="oceanites' blog">
+    </a>
+
+    <h1>
+      <a href="/">oceanites' blog</a>
+    </h1>
+
+    <p>Earth Observation, Python, Linux</p>
+
+
+
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="/">Home</a>
+
+
+
+</nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="installing-snappy-snap-toolbox-python-bindings-on-ubuntu-2210-kinetic">Installing Snappy (SNAP toolbox python bindings) on Ubuntu 22.10 (kinetic)</h1>
+    <p>
+      Posted on Fr 12 Mai 2023 in <a href="/category/misc.html">misc</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <ul>
+<li><a href="https://step.esa.int/main/download/snap-download/">Download SNAP package</a> and install it:<ul>
+<li><code>chmod +x esa-snap_sentinel_unix_9_0_0.sh</code></li>
+<li><code>./esa-snap_sentinel_unix_9_0_0.sh</code></li>
+<li>Installation directory: <code>~/.snap</code></li>
+<li>Symlink folder: <code>~/.local/bin</code> ("Select the folder where you would like ESA SNAP to create symlinks, then click Next.")</li>
+<li>Python path: <code>/usr/bin/python3</code> ("Python executable")</li>
+</ul>
+</li>
+<li>Install OpenJDK 8:<ul>
+<li>as documented on the <a href="see https://wiki.ubuntuusers.de/Java/Installation/OpenJDK/#OpenJDK-8">ubuntuusers.de wiki</a>: <code>sudo apt install openjdk-8-jre openjdk-8-jdk openjdk-8-demo openjdk-8-doc openjdk-8-jre-headless openjdk-8-source</code></li>
+</ul>
+</li>
+<li>Either:<ul>
+<li>Build python-java bridge <code>jpy</code> manually and then notice, that it fails later on with <code>RuntimeError: jpy: internal error: static method not found: unwrapProxy(Ljava/lang/Object;)Lorg/jpy/PyObject;</code></li>
+<li>https://github.com/jpy-consortium/jpy</li>
+<li>Install requirement for building <code>sudo apt install maven</code></li>
+<li>set correct paths, in my case: <code>export JDK_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64/; export JAVA_HOME=$JDK_HOME</code></li>
+<li>Build it: <code>python3 setup.py build maven bdist_wheel</code></li>
+<li>and find it under <code>dist/</code></li>
+</ul>
+</li>
+<li>or use jpy from anaconda, which is recommended in one thread in the <a href="https://forum.step.esa.int/t/problems-with-snappy-and-python-3-8/36833/5">ESA forum</a><ul>
+<li>Download: <code>wget https://anaconda.org/Terradue/jpy/0.9.0/download/linux-64/jpy-0.9.0-py38_3.tar.bz2</code></li>
+<li>unpack it, and find the file <code>jpy-0.9.0-cp38-cp38-linux_x86_64.whl</code></li>
+</ul>
+</li>
+<li>Install python3.8, as the current python 3.10 seems to be incompatible:<ul>
+<li>add repository <code>sudo add-apt-repository ppa:deadsnakes/ppa</code></li>
+<li>modify <code>/etc/apt/sources.list.d/deadsnakes-ubuntu-ppa-kinetic.list</code> and replace the word <code>kinetic</code> (the current version 22.10) with <code>jammy</code> (the LTS version 22.04). It should then read <code>deb https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu/ jammy main</code></li>
+<li>Get the package list and install it: <code>sudo apt update &amp;&amp; sudo apt install python3.8 python3.8-tk python3.8-distutils python3.8-venv</code></li>
+</ul>
+</li>
+<li>create a new virtual environment:<ul>
+<li>create it: <code>python3.8 -m venv snappy-env38</code></li>
+<li>activate it: <code>source snappy-env38/bin/activate</code></li>
+</ul>
+</li>
+<li>Configure snappy for this environment:<ul>
+<li>Run <code>./.snap/bin/snappy-conf $(command -v python3.8)</code> for a first time, this fails in the end but creates some required folders.</li>
+<li>Copy the jpy wheel downloaded from anaconda into the snappy directory: <code>cp snappy-installation/jpy_wheel/jpy-0.9.0-cp38-cp38-linux_x86_64.whl .snappy/snappy/</code></li>
+<li>Run the configuration tool again: <code>./.snap/bin/snappy-conf $(command -v python3.8)</code>, this should work now. Maybe it hangs with
+  <code>Done. The SNAP-Python interface is located in '/home/trossberg/.snappy/snappy'  
+When using SNAP from Python, either do: sys.path.append('/home/trossberg/.snappy')  
+or copy the 'snappy' module into your Python's 'site-packages' directory.</code>
+  This can be ignored and the programm stopped.</li>
+<li>Install snappy in the environment <code>python3.8 .snappy/snappy/setup.py install</code></li>
+</ul>
+</li>
+<li>Test it: <code>python3.8 -c "import snappy"</code></li>
+</ul>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2023 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " oceanites' blog ",
+  "url" : "",
+  "image": "/images/profile.png",
+  "description": ""
+}
+</script>
+</body>
+</html>
